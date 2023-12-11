@@ -44,7 +44,7 @@ class _IPTextboxState extends State<IPTextbox> {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           SizedBox(
-            width: 50,
+            width: 120,
             child: TextField(
               controller: widget.controller,
             ),
