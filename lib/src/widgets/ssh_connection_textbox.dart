@@ -40,6 +40,8 @@ class _SshConnectionTextboxState extends State<SshConnectionTextbox> {
 
   @override
   Widget build(final BuildContext context) => Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           TextField(
             controller: widget.controller,
