@@ -18,3 +18,5 @@ export "package:orbit_standard_library/src/widgets/switcher.dart" show Switcher;
 
 export "package:orbit_standard_library/src/tuple_extensions.dart"
     show TupleExtensions;
+export "package:orbit_standard_library/src/widgets/ssh_connection_textbox.dart"
+    show SshConnectionTextbox;
