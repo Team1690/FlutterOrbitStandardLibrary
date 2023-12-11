@@ -22,8 +22,8 @@ enum IPType {
   final String _ipString;
 }
 
-class SshConnectionTextbox extends StatefulWidget {
-  const SshConnectionTextbox({
+class IPTextbox extends StatefulWidget {
+  const IPTextbox({
     required this.controller,
     required this.onChanged,
   });
@@ -32,10 +32,10 @@ class SshConnectionTextbox extends StatefulWidget {
   final void Function() onChanged;
 
   @override
-  State<SshConnectionTextbox> createState() => _SshConnectionTextboxState();
+  State<IPTextbox> createState() => _IPTextboxState();
 }
 
-class _SshConnectionTextboxState extends State<SshConnectionTextbox> {
+class _IPTextboxState extends State<IPTextbox> {
   IPType ipType = IPType.wifi;
 
   @override
