@@ -43,8 +43,11 @@ class _IPTextboxState extends State<IPTextbox> {
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          TextField(
-            controller: widget.controller,
+          SizedBox(
+            width: 50,
+            child: TextField(
+              controller: widget.controller,
+            ),
           ),
           IconButton(
             onPressed: () {
