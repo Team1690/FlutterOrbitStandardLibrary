@@ -2,24 +2,22 @@ import "package:flutter/material.dart";
 import "dart:core";
 
 enum IPType {
-  wifi("10.16.90.2"),
-  usb("172.22.11.2"),
-  ethernet("169.254.250.182");
+  wifi("10.16.90.2", Icons.wifi),
+  usb("172.22.11.2", Icons.cable),
+  ethernet("169.254.250.182", Icons.settings_ethernet_rounded);
 
-  const IPType(this._ipString);
+  const IPType(
+    this.ip,
+    this.icon,
+  );
 
-  IPType increment() => this == IPType.wifi
-      ? IPType.usb
-      : this == IPType.usb
-          ? IPType.ethernet
-          : IPType.wifi;
-  IconData getIcon() => this == IPType.wifi
-      ? Icons.wifi
-      : this == IPType.usb
-          ? Icons.cable
-          : Icons.settings_ethernet_rounded;
-  String get ip => _ipString;
-  final String _ipString;
+  IPType increment() => switch (this) {
+        IPType.ethernet => IPType.usb,
+        IPType.usb => IPType.wifi,
+        IPType.wifi => IPType.ethernet
+      };
+  final String ip;
+  final IconData icon;
 }
 
 class IPTextbox extends StatefulWidget {
@@ -29,7 +27,7 @@ class IPTextbox extends StatefulWidget {
   });
 
   final TextEditingController controller;
-  final void Function() onChanged;
+  final void Function([String]) onChanged;
 
   @override
   State<IPTextbox> createState() => _IPTextboxState();
@@ -40,13 +38,13 @@ class _IPTextboxState extends State<IPTextbox> {
 
   @override
   Widget build(final BuildContext context) => Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           SizedBox(
             width: 120,
             child: TextField(
               controller: widget.controller,
+              onChanged: widget.onChanged,
             ),
           ),
           IconButton(
@@ -57,7 +55,7 @@ class _IPTextboxState extends State<IPTextbox> {
               });
             },
             icon: Icon(
-              ipType.getIcon(),
+              ipType.icon,
             ),
           ),
         ],
