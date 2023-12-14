@@ -1,6 +1,6 @@
 name: orbit_standard_library
 description: Orbit Standard Library
-version: 0.0.6
+version: 0.1.0
 repository: https://github.com/Team1690/FlutterOrbitStandardLibrary
 
 environment:
