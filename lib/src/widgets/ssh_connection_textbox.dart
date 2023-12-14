@@ -52,6 +52,7 @@ class _IPTextboxState extends State<IPTextbox> {
               setState(() {
                 ipType = ipType.increment();
                 widget.controller.text = ipType.ip;
+                widget.onChanged.call();
               });
             },
             icon: Icon(
