@@ -73,7 +73,7 @@ class TextFieldConfiguration {
   });
   final TextEditingController? controller;
   final FocusNode? focusNode;
-  final BoxDecoration decoration;
+  final Decoration decoration;
   final EdgeInsetsGeometry padding;
   final String? placeholder;
   final TextStyle? placeholderStyle;
@@ -113,7 +113,7 @@ class TextFieldConfiguration {
   TextFieldConfiguration copyWith({
     final TextEditingController? controller,
     final FocusNode? focusNode,
-    final BoxDecoration? decoration,
+    final Decoration? decoration,
     final EdgeInsetsGeometry? padding,
     final String? placeholder,
     final TextStyle? placeholderStyle,
