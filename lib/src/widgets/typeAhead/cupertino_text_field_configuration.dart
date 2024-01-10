@@ -1,17 +1,18 @@
 import "package:flutter/cupertino.dart";
+import "package:flutter/material.dart";
 import "package:flutter/services.dart";
 
 // Cupertino BoxDecoration taken from flutter/lib/src/cupertino/text_field.dart
-const BorderSide _kDefaultRoundedBorderSide = BorderSide(
+/*const BorderSide _kDefaultRoundedBorderSide = BorderSide(
   color: CupertinoDynamicColor.withBrightness(
     color: Color(0x33000000),
     darkColor: Color(0x33FFFFFF),
   ),
   style: BorderStyle.solid,
   width: 0.0,
-);
+);*/
 
-const Border _kDefaultRoundedBorder = Border(
+/*const Border _kDefaultRoundedBorder = Border(
   top: _kDefaultRoundedBorderSide,
   bottom: _kDefaultRoundedBorderSide,
   left: _kDefaultRoundedBorderSide,
@@ -25,7 +26,7 @@ const BoxDecoration _kDefaultRoundedBorderDecoration = BoxDecoration(
   ),
   border: _kDefaultRoundedBorder,
   borderRadius: BorderRadius.all(Radius.circular(5.0)),
-);
+);*/
 
 /// property to configure the displayed text field. See [documentation](https://docs.flutter.io/flutter/cupertino/CupertinoTextField-class.html)
 /// for more information on properties.
@@ -35,7 +36,11 @@ class TextFieldConfiguration {
   const TextFieldConfiguration({
     this.controller,
     this.focusNode,
-    this.decoration = _kDefaultRoundedBorderDecoration,
+    this.decoration = const InputDecoration(
+              prefixIcon: Icon(Icons.search),
+              border: OutlineInputBorder(),
+              hintText: "Search Match",
+            ),
     this.padding = const EdgeInsets.all(6.0),
     this.placeholder,
     this.placeholderStyle,
@@ -73,7 +78,7 @@ class TextFieldConfiguration {
   });
   final TextEditingController? controller;
   final FocusNode? focusNode;
-  final Decoration decoration;
+  final InputDecoration decoration;
   final EdgeInsetsGeometry padding;
   final String? placeholder;
   final TextStyle? placeholderStyle;
@@ -113,7 +118,7 @@ class TextFieldConfiguration {
   TextFieldConfiguration copyWith({
     final TextEditingController? controller,
     final FocusNode? focusNode,
-    final Decoration? decoration,
+    final InputDecoration? decoration,
     final EdgeInsetsGeometry? padding,
     final String? placeholder,
     final TextStyle? placeholderStyle,
