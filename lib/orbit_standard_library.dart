@@ -20,3 +20,6 @@ export "package:orbit_standard_library/src/tuple_extensions.dart"
     show TupleExtensions;
 export "package:orbit_standard_library/src/widgets/ssh_connection_textbox.dart"
     show IPTextbox;
+export "package:orbit_standard_library/src/widgets/typeAhead/cupertino_typeahead_form_field.dart"   
+    show TypeAheadFormField;
+    

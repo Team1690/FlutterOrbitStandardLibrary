@@ -16,10 +16,10 @@ import "package:orbit_standard_library/src/widgets/typeAhead/typedef.dart";
 ///
 /// * [TypeAheadField], A [CupertinoTextField](https://docs.flutter.io/flutter/cupertino/CupertinoTextField-class.html)
 /// that displays a list of suggestions as the user types
-class CupertinoTypeAheadFormField<T> extends FormField<String> {
+class TypeAheadFormField<T> extends FormField<String> {
 
-  /// Creates a [CupertinoTypeAheadFormField]
-  CupertinoTypeAheadFormField({
+  /// Creates a [TypeAheadFormField]
+  TypeAheadFormField({
     super.key,
     final String? initialValue,
     final bool getImmediateSuggestions = false,
@@ -103,8 +103,8 @@ class CupertinoTypeAheadFormFieldState<T> extends FormFieldState<String> {
       widget.textFieldConfiguration.controller ?? _controller;
 
   @override
-  CupertinoTypeAheadFormField<dynamic> get widget =>
-      super.widget as CupertinoTypeAheadFormField<dynamic>;
+  TypeAheadFormField<dynamic> get widget =>
+      super.widget as TypeAheadFormField<dynamic>;
 
   @override
   void initState() {
@@ -118,7 +118,7 @@ class CupertinoTypeAheadFormFieldState<T> extends FormFieldState<String> {
   }
 
   @override
-  void didUpdateWidget(final CupertinoTypeAheadFormField<dynamic> oldWidget) {
+  void didUpdateWidget(final TypeAheadFormField<dynamic> oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.textFieldConfiguration.controller !=
         oldWidget.textFieldConfiguration.controller) {
