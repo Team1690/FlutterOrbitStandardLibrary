@@ -22,6 +22,4 @@ export "package:orbit_standard_library/src/widgets/ssh_connection_textbox.dart"
     show IPTextbox;
 export "package:orbit_standard_library/src/widgets/typeAhead/cupertino_typeahead_form_field.dart"   
     show TypeAheadFormField;
-export "package:orbit_standard_library/src/widgets/typeAhead/cupertino_text_field_configuration.dart"   
-    show TextFieldConfiguration;
 

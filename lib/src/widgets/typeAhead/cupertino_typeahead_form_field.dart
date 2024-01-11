@@ -2,10 +2,11 @@ import "dart:async";
 import "dart:core";
 
 import "package:flutter/cupertino.dart";
+import "package:flutter/material.dart";
+import "package:flutter/services.dart";
 import "package:flutter_typeahead/flutter_typeahead.dart";
 import "package:orbit_standard_library/src/widgets/typeAhead/cupertino_suggestions_box_controller.dart";
 import "package:orbit_standard_library/src/widgets/typeAhead/cupertino_suggestions_box_decoration.dart";
-import "package:orbit_standard_library/src/widgets/typeAhead/cupertino_text_field_configuration.dart";
 import "package:orbit_standard_library/src/widgets/typeAhead/typedef.dart";
 
 /// A [FormField](https://docs.flutter.io/flutter/widgets/FormField-class.html)
@@ -21,52 +22,83 @@ class TypeAheadFormField<T> extends FormField<String> {
   /// Creates a [TypeAheadFormField]
   TypeAheadFormField({
     super.key,
-    final String? initialValue,
-    final bool getImmediateSuggestions = false,
-    @Deprecated("Use autoValidateMode parameter which provides more specific "
-        "behavior related to auto validation. "
-        "This feature was deprecated after Flutter v1.19.0.")
-    final bool autovalidate = false,
     super.enabled,
     super.autovalidateMode,
     super.onSaved,
     super.validator,
-    final ErrorBuilder? errorBuilder,
-    final WidgetBuilder? noItemsFoundBuilder,
-    final WidgetBuilder? loadingBuilder,
-    final Duration debounceDuration = const Duration(milliseconds: 300),
-    final CupertinoSuggestionsBoxDecoration suggestionsBoxDecoration =
-        const CupertinoSuggestionsBoxDecoration(),
-    final CupertinoSuggestionsBoxController? suggestionsBoxController,
-    required final SuggestionSelectionCallback<T> onSuggestionSelected,
-    required final ItemBuilder<T> itemBuilder,
-    final IndexedWidgetBuilder? itemSeparatorBuilder,
-    required final FutureOr<List<T>> Function(String) suggestionsCallback,
-    final double suggestionsBoxVerticalOffset = 5.0,
-    this.textFieldConfiguration = const TextFieldConfiguration(),
-    final Widget Function(BuildContext, Animation<double>, Widget)? transitionBuilder,
-    final Duration animationDuration = const Duration(milliseconds: 500),
-    final double animationStart = 0.25,
-    final TextEditingController? controller,
-    final VerticalDirection direction = VerticalDirection.down,
-    final bool hideOnLoading = false,
-    final bool hideOnEmpty = false,
-    final bool hideOnError = false,
-    final bool hideSuggestionsOnKeyboardHide = true,
-    final bool keepSuggestionsOnLoading = true,
-    final bool keepSuggestionsOnSuggestionSelected = false,
-    final bool autoFlipDirection = false,
-    final bool autoFlipListDirection = true,
-    final double autoFlipMinHeight = 64.0,
-    final int minCharsForSuggestions = 0,
-    final bool hideKeyboardOnDrag = false,
-    final void Function(T)? onSelected,
+    final String? initialValue,
+    this.getImmediateSuggestions = false,
+    this.autovalidate = false,
+    this.errorBuilder,
+    this.loadingBuilder,
+    this.noItemsFoundBuilder,
+    this.debounceDuration = const Duration(milliseconds: 300),
+    this.suggestionsBoxDecoration = const CupertinoSuggestionsBoxDecoration(),
+    this.suggestionsBoxController,
+    required this.onSuggestionSelected,
+    required this.itemBuilder,
+    this.itemSeparatorBuilder,
+    required this.suggestionsCallback,
+    this.suggestionsBoxVerticalOffset = 5.0,
+    this.transitionBuilder,
+    this.animationDuration = const Duration(milliseconds: 500),
+    this.animationStart = 0.25,
+    this.controller,
+    this.direction = VerticalDirection.down,
+    this.hideOnEmpty = false,
+    this.hideOnError = false,
+    this.hideOnLoading = false,
+    this.hideSuggestionsOnKeyboardHide = true,
+    this.keepSuggestionsOnLoading = true,
+    this.keepSuggestionsOnSuggestionSelected = false,
+    this.autoFlipDirection = false,
+    this.autoFlipListDirection = true,
+    this.autoFlipMinHeight = 64.0,
+    this.minCharsForSuggestions = 0,
+    this.hideKeyboardOnDrag = false,
+    this.onSelected,
+    this.focusNode,
+    this.decoration,
+    this.padding,
+    this.placeholder,
+    this.placeholderStyle,
+    this.prefix,
+    this.prefixMode,
+    this.suffix,
+    this.suffixMode,
+    this.clearButtonMode,
+    this.keyboardType,
+    this.textInputAction,
+    this.textCapitalization,
+    this.style,
+    this.textAlign,
+    this.autofocus,
+    this.obscureText,
+    this.autocorrect,
+    this.maxLines,
+    this.minLines,
+    this.maxLength,
+    this.maxLengthEnforcement,
+    this.onChanged,
+    this.onEditingComplete,
+    this.onTap,
+    this.onSubmitted,
+    this.inputFormatters,
+    this.enableSuggestions,
+    this.cursorColor,
+    this.cursorRadius,
+    this.cursorWidth,
+    this.keyboardAppearance,
+    this.scrollPadding,
+    this.enableInteractiveSelection,
+    this.autofillHints,
+
   })  : assert(
-            initialValue == null || textFieldConfiguration.controller == null,),
+            initialValue == null || controller == null,),
         assert(minCharsForSuggestions >= 0),
         super(
-            initialValue: textFieldConfiguration.controller != null
-                ? textFieldConfiguration.controller!.text
+            initialValue: controller != null
+                ? controller.text
                 : (initialValue ?? ""),
             builder: (final FormFieldState<String> field) => TypeAheadField<T>(
                 onSelected: onSelected,
@@ -89,9 +121,78 @@ class TypeAheadFormField<T> extends FormField<String> {
                 transitionBuilder: transitionBuilder,
                 ),
             );
+  
+    final bool getImmediateSuggestions;
+    @Deprecated("Use autoValidateMode parameter which provides more specific "
+        "behavior related to auto validation. "
+        "This feature was deprecated after Flutter v1.19.0.")
+    final bool autovalidate;
+    final ErrorBuilder? errorBuilder;
+    final WidgetBuilder? noItemsFoundBuilder;
+    final WidgetBuilder? loadingBuilder;
+    final Duration debounceDuration;
+    final CupertinoSuggestionsBoxDecoration suggestionsBoxDecoration;
+    final CupertinoSuggestionsBoxController? suggestionsBoxController;
+    final SuggestionSelectionCallback<T> onSuggestionSelected;
+    final ItemBuilder<T> itemBuilder;
+    final IndexedWidgetBuilder? itemSeparatorBuilder;
+    final FutureOr<List<T>> Function(String) suggestionsCallback;
+    final double suggestionsBoxVerticalOffset;
+    final Widget Function(BuildContext, Animation<double>, Widget)? transitionBuilder;
+    final Duration animationDuration;
+    final double animationStart;
+    final TextEditingController? controller;
+    final VerticalDirection direction;
+    final bool hideOnLoading;
+    final bool hideOnEmpty;
+    final bool hideOnError;
+    final bool hideSuggestionsOnKeyboardHide;
+    final bool keepSuggestionsOnLoading;
+    final bool keepSuggestionsOnSuggestionSelected;
+    final bool autoFlipDirection;
+    final bool autoFlipListDirection;
+    final double autoFlipMinHeight;
+    final int minCharsForSuggestions;
+    final bool hideKeyboardOnDrag;
+    final void Function(T)? onSelected;
+    final FocusNode? focusNode;
+    final InputDecoration? decoration;
+    final EdgeInsetsGeometry? padding;
+    final String? placeholder;
+    final TextStyle? placeholderStyle;
+    final Widget? prefix;
+    final OverlayVisibilityMode? prefixMode;
+    final Widget? suffix;
+    final OverlayVisibilityMode? suffixMode;
+    final OverlayVisibilityMode? clearButtonMode;
+    final TextInputType? keyboardType;
+    final TextInputAction? textInputAction;
+    final TextCapitalization? textCapitalization;
+    final TextStyle? style;
+    final TextAlign? textAlign;
+    final bool? autofocus;
+    final bool? obscureText;
+    final bool? autocorrect;
+    final int? maxLines;
+    final int? minLines;
+    final int? maxLength;
+    final MaxLengthEnforcement? maxLengthEnforcement;
+    final ValueChanged<String>? onChanged;
+    final VoidCallback? onEditingComplete;
+    final GestureTapCallback? onTap;
+    final ValueChanged<String>? onSubmitted;
+    final List<TextInputFormatter>? inputFormatters;
+    final bool? enableSuggestions;
+    final double? cursorWidth;
+    final Radius? cursorRadius;
+    final Color? cursorColor;
+    final Brightness? keyboardAppearance;
+    final EdgeInsets? scrollPadding;
+    final bool? enableInteractiveSelection;
+    final List<String>? autofillHints;
   /// The configuration of the [CupertinoTextField](https://docs.flutter.io/flutter/cupertino/CupertinoTextField-class.html)
   /// that the TypeAhead widget displays
-  final TextFieldConfiguration textFieldConfiguration;
+  
 
   @override
   CupertinoTypeAheadFormFieldState<T> createState() =>
@@ -102,8 +203,7 @@ class CupertinoTypeAheadFormFieldState<T> extends FormFieldState<String> {
   TextEditingController? _controller;
 
   TextEditingController? get _effectiveController =>
-      widget.textFieldConfiguration.controller ?? _controller;
-
+      widget.controller ?? _controller;
   @override
   TypeAheadFormField<dynamic> get widget =>
       super.widget as TypeAheadFormField<dynamic>;
@@ -111,10 +211,10 @@ class CupertinoTypeAheadFormFieldState<T> extends FormFieldState<String> {
   @override
   void initState() {
     super.initState();
-    if (widget.textFieldConfiguration.controller == null) {
+    if (widget.controller == null) {
       _controller = TextEditingController(text: widget.initialValue);
     } else {
-      widget.textFieldConfiguration.controller!
+      widget.controller!
           .addListener(_handleControllerChanged);
     }
   }
@@ -122,21 +222,21 @@ class CupertinoTypeAheadFormFieldState<T> extends FormFieldState<String> {
   @override
   void didUpdateWidget(final TypeAheadFormField<dynamic> oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (widget.textFieldConfiguration.controller !=
-        oldWidget.textFieldConfiguration.controller) {
-      oldWidget.textFieldConfiguration.controller
+    if (widget.controller !=
+        oldWidget.controller) {
+      oldWidget.controller
           ?.removeListener(_handleControllerChanged);
-      widget.textFieldConfiguration.controller
+      widget.controller
           ?.addListener(_handleControllerChanged);
 
-      if (oldWidget.textFieldConfiguration.controller != null &&
-          widget.textFieldConfiguration.controller == null) {
+      if (oldWidget.controller != null &&
+          widget.controller == null) {
         _controller = TextEditingController.fromValue(
-            oldWidget.textFieldConfiguration.controller!.value,);
+            oldWidget.controller!.value,);
       }
-      if (widget.textFieldConfiguration.controller != null) {
-        setValue(widget.textFieldConfiguration.controller!.text);
-        if (oldWidget.textFieldConfiguration.controller == null) {
+      if (widget.controller != null) {
+        setValue(widget.controller!.text);
+        if (oldWidget.controller == null) {
           _controller = null;
         }
       }
@@ -145,7 +245,7 @@ class CupertinoTypeAheadFormFieldState<T> extends FormFieldState<String> {
 
   @override
   void dispose() {
-    widget.textFieldConfiguration.controller
+    widget.controller
         ?.removeListener(_handleControllerChanged);
     super.dispose();
   }
