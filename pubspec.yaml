@@ -4,11 +4,11 @@ version: 0.1.9
 repository: https://github.com/Team1690/FlutterOrbitStandardLibrary
 
 environment:
-  sdk: '>=3.0.3 <4.0.0'
+  sdk: ">=3.0.3 <4.0.0"
   flutter: ">=3.0.0"
 
 dependencies:
-  carousel_slider: ^4.2.1
+  carousel_slider: ^5.0.0
   collection: ^1.17.1
   flutter:
     sdk: flutter
