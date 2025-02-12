@@ -51,7 +51,7 @@ class _IPTextboxState extends State<IPTextbox> {
               onTap: (widget.focusNode != null)
                   ? () {
                       setState(() {
-                        widget.focusNode.requestFocus();
+                        widget.focusNode!.requestFocus();
                       });
                     }
                   : null,
