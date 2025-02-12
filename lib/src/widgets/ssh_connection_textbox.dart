@@ -24,10 +24,12 @@ class IPTextbox extends StatefulWidget {
   const IPTextbox({
     required this.controller,
     required this.onChanged,
+    this.focusNode,
   });
 
   final TextEditingController controller;
   final void Function([String]) onChanged;
+  final FocusNode? focusNode;
 
   @override
   State<IPTextbox> createState() => _IPTextboxState();
@@ -45,6 +47,19 @@ class _IPTextboxState extends State<IPTextbox> {
             child: TextField(
               controller: widget.controller,
               onChanged: widget.onChanged,
+              focusNode: widget.focusNode,
+              onTap: (widget.focusNode != null)
+                  ? () {
+                      setState(() {});
+                    }
+                  : null,
+              onTapOutside: (widget.focusNode != null)
+                  ? (final _) {
+                      setState(() {
+                        widget.focusNode!.unfocus();
+                      });
+                    }
+                  : null,
             ),
           ),
           IconButton(
