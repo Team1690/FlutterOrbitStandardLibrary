@@ -1,4 +1,4 @@
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:orbit_standard_library/src/map_nullable.dart";
 
 class Selector<T> extends StatelessWidget {
@@ -41,12 +41,12 @@ class Selector<T> extends StatelessWidget {
       validator: (final T? selection) =>
           selection.fold(always("Cannot select placeholder"), validate),
       isExpanded: true,
-      value: value,
+      initialValue: value,
       elevation: 24,
       decoration: InputDecoration(
         border: OutlineInputBorder(
           borderRadius:
-              this.borderRadius ?? const BorderRadius.all(Radius.circular(4)),
+              borderRadius ?? const BorderRadius.all(Radius.circular(4)),
         ),
       ),
       style: TextStyle(

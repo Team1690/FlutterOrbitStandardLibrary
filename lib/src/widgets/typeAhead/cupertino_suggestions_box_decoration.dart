@@ -1,4 +1,4 @@
-import "package:flutter/cupertino.dart";
+import "package:cupertino_ui/cupertino_ui.dart";
 
 /// property to configure the suggestions box decoration
 class CupertinoSuggestionsBoxDecoration {

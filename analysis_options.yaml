@@ -2,7 +2,13 @@
 include: package:lints/recommended.yaml
 
 analyzer:
-  exclude: [build/**, lib/generated_plugin_registrant.dart]
+  exclude:
+    - build/**
+    - lib/generated_plugin_registrant.dart
+    - android/**
+    - ios/**
+    - macos/**
+    - linux/**
   language:
     strict-raw-types: true
     strict-casts: true

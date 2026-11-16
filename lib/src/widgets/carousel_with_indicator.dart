@@ -1,5 +1,5 @@
 import "package:carousel_slider/carousel_slider.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 
 class CarouselWithIndicator extends StatefulWidget {
   CarouselWithIndicator({
@@ -65,7 +65,7 @@ class _CarouselWithIndicatorState extends State<CarouselWithIndicator> {
                     color: (Theme.of(context).brightness == Brightness.dark
                             ? Colors.white
                             : Colors.black)
-                        .withOpacity(_current == index ? 0.9 : 0.4),
+                        .withValues(alpha: _current == index ? 0.9 : 0.4),
                   ),
                 ),
               ),

@@ -1,4 +1,4 @@
-import "package:flutter/cupertino.dart";
+import "package:cupertino_ui/cupertino_ui.dart";
 import "package:orbit_standard_library/src/widgets/typeAhead/cupertino_suggestions_box.dart";
 
 /// property to manually control the suggestions box

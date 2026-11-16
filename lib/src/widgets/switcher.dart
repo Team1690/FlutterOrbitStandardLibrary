@@ -1,4 +1,4 @@
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 
 class Switcher extends StatelessWidget {
   Switcher({
@@ -53,11 +53,11 @@ class Switcher extends StatelessWidget {
                       ),
                     ),
                     style: ButtonStyle(
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                         getBorder(i),
                       ),
-                      overlayColor: MaterialStateColor.resolveWith(
-                        (final Set<MaterialState> states) => Colors.grey,
+                      overlayColor: WidgetStateColor.resolveWith(
+                        (final Set<WidgetState> states) => Colors.grey,
                       ),
                     ),
                     onPressed: () {
