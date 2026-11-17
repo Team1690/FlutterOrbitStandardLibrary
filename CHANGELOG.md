@@ -1,3 +1,7 @@
+## 0.3.0
+* BREAKING: migrated from `package:flutter/material.dart` to `package:material_ui`.
+
+
 ## 0.0.2
 Added `empty_to_null`, `always`, `always2`, `identity`
 
